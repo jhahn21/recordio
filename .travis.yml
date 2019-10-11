@@ -1,16 +1,16 @@
 language: go
 
 go:
-	- 1.13.x
-	- tip
+  - 1.13.x
+  - tip
 
 stages:
-	- fmt
-	- test
+  - fmt
+  - test
 
 matrix:
-	fast_finish: true
+  fast_finish: true
   include:
-    - stage: fmt
-      go: tip
-      script: diff -u <(echo -n) <(gofmt -d -s .)
+  - stage: fmt
+    go: tip
+    script: diff -u <(echo -n) <(gofmt -d -s .)
