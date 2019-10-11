@@ -2,6 +2,8 @@
 
 Package recordio implements a file format for a sequence of variable-length data.
 
+[![Build Status](https://travis-ci.org/jhahn21/recordio.svg?branch=master)](https://travis-ci.org/jhahn21/recordio)
+
 ## Benchmarks
 
 On `Intel(R) Core(TM) i5-8259U CPU @ 2.30GHz`
