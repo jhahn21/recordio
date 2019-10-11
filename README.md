@@ -3,6 +3,8 @@
 Package recordio implements a file format for a sequence of variable-length data.
 
 [![Build Status](https://travis-ci.org/jhahn21/recordio.svg?branch=master)](https://travis-ci.org/jhahn21/recordio)
+[![GoDoc](https://godoc.org/github.com/jhahn21/recordio?status.svg)](https://godoc.org/github.com/jhahn21/recordio)
+[![Go Report Card](https://goreportcard.com/badge/github.com/jhahn21/recordio)](https://goreportcard.com/report/github.com/jhahn21/recordio)
 
 ## Benchmarks
 
