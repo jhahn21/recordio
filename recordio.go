@@ -2,19 +2,20 @@ package recordio
 
 import "errors"
 
+// Mode configures how to store records.
 type Mode uint32
 
 const (
 	modeBase Mode = 0xe0319fd0 // fnv1a32("RecordIO")
 
-	// No compression.
+	// NoCompression does not compress records.
 	NoCompression = modeBase + iota
-	// Compression with Snappy.
+	// Snappy compresses records with Snappy.
 	Snappy
-	// Compression with zlib.
+	// Zlib compresses records with zlib.
 	Zlib
 
-	// End of mode.
+	// EndOfMode is the end of mode.
 	EndOfMode
 
 	recHeaderSize = 12
