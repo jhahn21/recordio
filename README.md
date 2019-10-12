@@ -59,7 +59,6 @@ $ git push gerrit HEAD:refs/for/master
 $ git commit --amend
 $ git push gerrit HEAD:refs/for/master
 ...
-
 ```
 
 > You can find more details at [Gerrit Code Review Workflow](https://review.gerrithub.io/Documentation/intro-user.html#code-review).
