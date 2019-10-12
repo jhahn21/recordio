@@ -35,3 +35,31 @@ BenchmarkWrite/zlib_10000                     5492      193872 ns/op       150 B
 PASS
 ok    github.com/jhahn21/recordio 24.716s
 ```
+
+## How to contribute
+
+We use [Gerrit](https://review.gerrithub.io) for reviewing proposed changes.
+
+```
+$ git clone https://github.com/jhahn21/recordio.git
+$ cd recordio
+$ curl -Lo .git/hooks/commit-msg https://review.gerrithub.io/tools/hooks/commit-msg
+$ chmod +x .git/hooks/commit-msg
+$ git remote add gerrit https://review.gerrithub.io/jhahn21/recordio
+...
+
+// Push for code review
+...
+$ git commit
+$ git push gerrit HEAD:refs/for/master
+...
+
+// Push a patch Set
+...
+$ git commit --amend
+$ git push gerrit HEAD:refs/for/master
+...
+
+```
+
+> You can find more details at [Gerrit Code Review Workflow](https://review.gerrithub.io/Documentation/intro-user.html#code-review).
