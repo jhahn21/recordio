@@ -63,6 +63,12 @@ func TestRecordIO(t *testing.T) {
 	}
 }
 
+func genRec(rand *rand.Rand, n int) []byte {
+	rec := make([]byte, n)
+	rand.Read(rec)
+	return rec
+}
+
 // infiniteRecs emits an infinite stream of records.
 type infiniteRecs struct {
 	buf []byte
@@ -79,12 +85,6 @@ func (r *infiniteRecs) Read(p []byte) (int, error) {
 	return n, nil
 }
 
-func genRec(rand *rand.Rand, n int) []byte {
-	rec := make([]byte, n)
-	rand.Read(rec)
-	return rec
-}
-
 func BenchmarkRead(b *testing.B) {
 	rand := rand.New(rand.NewSource(1000))
 
@@ -93,9 +93,13 @@ func BenchmarkRead(b *testing.B) {
 	for m := recordio.NoCompression; m < recordio.EndOfMode; m++ {
 		for _, size := range sizes {
 			b.Run(fmt.Sprintf("%v_%d", m, size), func(b *testing.B) {
+				const numRepeatedRecs = 10
+
 				var buf bytes.Buffer
-				w, _ := recordio.NewWriter(&buf, m)
-				w.Write(genRec(rand, size))
+				for i := 0; i < numRepeatedRecs; i++ {
+					w, _ := recordio.NewWriter(&buf, m)
+					w.Write(genRec(rand, size))
+				}
 
 				r, _ := recordio.NewReader(newInfiniteRecs(buf.Bytes()))
 
@@ -105,6 +109,8 @@ func BenchmarkRead(b *testing.B) {
 					if _, err := r.Read(); err != nil {
 						b.Fatal(err)
 					}
+
+					b.SetBytes(int64(size))
 				}
 			})
 		}
@@ -129,6 +135,8 @@ func BenchmarkWrite(b *testing.B) {
 					if _, err := w.Write(rec); err != nil {
 						b.Fatal(err)
 					}
+
+					b.SetBytes(int64(size))
 				}
 			})
 		}
